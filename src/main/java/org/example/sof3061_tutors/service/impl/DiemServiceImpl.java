@@ -1,23 +1,42 @@
 package org.example.sof3061_tutors.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.example.sof3061_tutors.dto.DiemDto;
 import org.example.sof3061_tutors.entity.Diem;
 import org.example.sof3061_tutors.exception.ResourceNotFoundException;
 import org.example.sof3061_tutors.repository.DiemRepository;
 import org.example.sof3061_tutors.service.DiemService;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class DiemServiceImpl implements DiemService {
 
     private final DiemRepository diemRepository;
+    private final ModelMapper modelMapper;
+
+    public DiemServiceImpl(DiemRepository diemRepository, ModelMapper modelMapper) {
+        this.diemRepository = diemRepository;
+        this.modelMapper = modelMapper;
+
+        TypeMap<Diem, DiemDto> propertyMapper = modelMapper.createTypeMap(Diem.class, DiemDto.class);
+        propertyMapper.addMappings(mapper -> {
+            mapper.map(src -> src.getSinhVien().getHoTen(), DiemDto::setHoTen);
+            mapper.map(src -> src.getSinhVien().getDiaChi(), DiemDto::setDiaChi);
+        });
+    }
+
 
     @Override
-    public List<Diem> getDiems() {
-        return diemRepository.findAll();
+    public List<DiemDto> getDiems() {
+        return diemRepository.findAll().stream()
+                .map(i -> modelMapper.map(i, DiemDto.class))
+                .collect(Collectors.toList());
     }
 
     @Override

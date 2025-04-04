@@ -1,6 +1,7 @@
 package org.example.sof3061_tutors.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.sof3061_tutors.dto.DiemDto;
 import org.example.sof3061_tutors.entity.Diem;
 import org.example.sof3061_tutors.service.DiemService;
 import org.springframework.http.HttpStatus;
@@ -16,10 +17,20 @@ public class DiemController {
 
     private final DiemService diemService;
 
-    @GetMapping
-    public ResponseEntity<List<Diem>> getDiems() {
+    //@GetMapping
+    //public ResponseEntity<List<Diem>> getDiems() {
+    //
+    //    List<Diem> diems = diemService.getDiems();
+    //
+    //    //return new ResponseEntity<>(diems, HttpStatus.OK);
+    //    return ResponseEntity.ok(diems);
+    //
+    //}
 
-        List<Diem> diems = diemService.getDiems();
+    @GetMapping
+    public ResponseEntity<List<DiemDto>> getDiems() {
+
+        List<DiemDto> diems = diemService.getDiems();
 
         //return new ResponseEntity<>(diems, HttpStatus.OK);
         return ResponseEntity.ok(diems);

@@ -41,4 +41,12 @@ public class DiemController {
 
         return ResponseEntity.ok(updatedDiem);
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteDiem(@PathVariable("id") long id) {
+
+        diemService.deleteDiem(id);
+
+        return ResponseEntity.ok("Deleted diem with id =" +id);
+    }
 }

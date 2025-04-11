@@ -36,3 +36,13 @@ INSERT INTO diem (ma_diem, sinh_vien_id, mon_hoc, diem_so) VALUES
 ('D018', 9, 'Toan', 6.8),
 ('D019', 10, 'Anh', 9.1),
 ('D020', 10, 'Sinh', 7.9);
+
+-----------------------------------------------------------
+INSERT INTO users(name, username, email, password) VALUES('user', 'user', 'user@gmail.com', '$2a$10$ZJ95pqs8zJVEaXMiyXR49unS/21S.BoDd/yfNXXtkWeJ627r5eLWm'); -- password = 123456
+INSERT INTO users(name, username, email, password) VALUES('admin', 'admin', 'admin@gmail.com', '$2a$10$ZJ95pqs8zJVEaXMiyXR49unS/21S.BoDd/yfNXXtkWeJ627r5eLWm');
+
+INSERT INTO roles(name) VALUES('ROLE_USER');
+INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+
+INSERT INTO users_roles (user_id, role_id) VALUES (1, 1);
+INSERT INTO users_roles (user_id, role_id) VALUES (2, 2);

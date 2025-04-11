@@ -1,5 +1,6 @@
 package org.example.sof3061_tutors.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.sof3061_tutors.dto.DiemDto;
 import org.example.sof3061_tutors.entity.Diem;
@@ -46,7 +47,7 @@ public class DiemController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Diem> updateDiem(@RequestBody Diem diem, @PathVariable("id") long id) {
+    public ResponseEntity<Diem> updateDiem(@Valid @RequestBody Diem diem, @PathVariable("id") long id) {
 
         Diem updatedDiem = diemService.updateDiem(diem, id);
 
